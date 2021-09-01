@@ -20,7 +20,7 @@ import { Text, StyleSheet } from "react-native";
 
 const TextInANest = () => {
   const [titleText, setTitleText] = useState("Bird's Nest");
-  const bodyText = useState("This is not really a bird nest.");
+  const bodyText = "This is not really a bird nest.";
 
   const onPressTitle = () => {
     setTitleText("Bird's Nest [pressed]");
@@ -298,6 +298,30 @@ You can provide one state, no state, or multiple states. The states must be pass
 
 ---
 
+### `accessibilityActions`
+
+Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.
+
+See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+
+| Type  | Required |
+| ----- | -------- |
+| array | No       |
+
+---
+
+### `onAccessibilityAction`
+
+Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.
+
+See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
 ### `accessible`
 
 When set to `true`, indicates that the view is an accessibility element.
@@ -310,7 +334,7 @@ See the [Accessibility guide](accessibility#accessible-ios-android) for more inf
 
 ---
 
-### `adjustsFontSizeToFit` <div class="label ios">iOS</div>
+### `adjustsFontSizeToFit`
 
 Specifies whether fonts should be scaled down automatically to fit given style constraints.
 
@@ -342,7 +366,7 @@ Sets the frequency of automatic hyphenation to use when determining word breaks 
 
 ### `dataDetectorType` <div class="label android">Android</div>
 
-Determines the types of data converted to clickable URLs in the text element. By default no data types are detected.
+Determines the types of data converted to clickable URLs in the text element. By default, no data types are detected.
 
 You can provide only one type.
 
@@ -364,7 +388,7 @@ Specifies the disabled state of the text view for testing purposes.
 
 ### `ellipsizeMode`
 
-When `numberOfLines` is set, this prop defines how text will be truncated. `numberOfLines` must be set in conjunction with this prop.
+When `numberOfLines` is set, this prop defines how the text will be truncated. `numberOfLines` must be set in conjunction with this prop.
 
 This can be one of the following values:
 
@@ -372,6 +396,8 @@ This can be one of the following values:
 - `middle` - The line is displayed so that the beginning and end fit in the container and the missing text in the middle is indicated by an ellipsis glyph. "ab...yz"
 - `tail` - The line is displayed so that the beginning fits in the container and the missing text at the end of the line is indicated by an ellipsis glyph. e.g., "abcd..."
 - `clip` - Lines are not drawn past the edge of the text container.
+
+> On Android, when `numberOfLines` is set to a value higher than `1`, only `tail` value will work correctly.
 
 | Type                                           | Default |
 | ---------------------------------------------- | ------- |
@@ -381,7 +407,7 @@ This can be one of the following values:
 
 ### `maxFontSizeMultiplier`
 
-Specifies largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:
+Specifies the largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:
 
 - `null/undefined`: inherit from the parent node or the global default (0)
 - `0`: no max, ignore parent/global default
@@ -395,7 +421,7 @@ Specifies largest possible scale a font can reach when `allowFontScaling` is ena
 
 ### `minimumFontScale` <div class="label ios">iOS</div>
 
-Specifies smallest possible scale a font can reach when `adjustsFontSizeToFit` is enabled. (values 0.01-1.0).
+Specifies the smallest possible scale a font can reach when `adjustsFontSizeToFit` is enabled. (values 0.01-1.0).
 
 | Type   |
 | ------ |
@@ -415,7 +441,7 @@ Used to locate this view from native code.
 
 ### `numberOfLines`
 
-Used to truncate the text with an ellipsis after computing the text layout, including line wrapping, such that the total number of lines does not exceed this number. Setting this property to `0` will result in unsetiing this value, which means that no lines restriction will be applied.
+Used to truncate the text with an ellipsis after computing the text layout, including line wrapping, such that the total number of lines does not exceed this number. Setting this property to `0` will result in unsetting this value, which means that no lines restriction will be applied.
 
 This prop is commonly used with `ellipsizeMode`.
 
@@ -467,7 +493,7 @@ This function is called on press.
 
 ### `onResponderGrant`
 
-The View is now responding for touch events. This is the time to highlight and show the user what is happening.
+The View is now responding to touch events. This is the time to highlight and show the user what is happening.
 
 | Type                               |
 | ---------------------------------- |
@@ -507,7 +533,7 @@ The responder has been taken from the `View`. Might be taken by other views afte
 
 ### `onResponderTerminationRequest`
 
-Some other `View` wants to become responder and is asking this `View` to release its responder. Returning `true` allows its release.
+Some other `View` wants to become a responder and is asking this `View` to release its responder. Returning `true` allows its release.
 
 | Type                                  |
 | ------------------------------------- |
@@ -517,7 +543,7 @@ Some other `View` wants to become responder and is asking this `View` to release
 
 ### `onStartShouldSetResponderCapture`
 
-If a parent `View` wants to prevent a child `View` from becoming responder on a touch start, it should have this handler which returns `true`.
+If a parent `View` wants to prevent a child `View` from becoming a responder on a touch start, it should have this handler which returns `true`.
 
 | Type                                  |
 | ------------------------------------- |
@@ -567,9 +593,9 @@ The highlight color of the text.
 
 ### `style`
 
-| Type                                                                       |
-| -------------------------------------------------------------------------- |
-| [Text Style Props](text-style-props), [View Style Props](view-style-props) |
+| Type                                                                 |
+| -------------------------------------------------------------------- |
+| [Text Style](text-style-props), [View Style Props](view-style-props) |
 
 ---
 
@@ -637,7 +663,7 @@ Set text break strategy on Android API Level 23+, possible values are `simple`, 
 
 ### TextLayoutEvent
 
-`TextLayoutEvent` object is returned in the callback as a result of component layout change. It contains a key called `lines` with a value which is an array containing [`TextLayout`](text#textlayout) object corresponeded to every rendered text line.
+`TextLayoutEvent` object is returned in the callback as a result of a component layout change. It contains a key called `lines` with a value which is an array containing [`TextLayout`](text#textlayout) object corresponded to every rendered text line.
 
 #### Example
 
@@ -658,7 +684,3 @@ Set text break strategy on Android API Level 23+, possible values are `simple`, 
 | ------ | --------------------------------------- | -------- | ----------------------------------------------------- |
 | lines  | array of [TextLayout](text#textlayout)s | No       | Provides the TextLayout data for every rendered line. |
 | target | number                                  | No       | The node id of the element.                           |
-
-## Known issues
-
-- [react-native#22811](https://github.com/facebook/react-native/issues/22811): Nested Text elements do not support `numberOfLines` attribute

@@ -23,7 +23,7 @@ If you must have an API key or a secret to access some resource from your app, t
 
 ### Async Storage
 
-[Async Storage](https://github.com/react-native-community/async-storage) is a community-maintained module for React Native that provides an asynchronous, unencrypted, key-value store. Async Storage is not shared between apps: every app has its own sandbox environment and has no access to data from other apps.
+[Async Storage](https://github.com/react-native-async-storage/async-storage) is a community-maintained module for React Native that provides an asynchronous, unencrypted, key-value store. Async Storage is not shared between apps: every app has its own sandbox environment and has no access to data from other apps.
 
 | **Do** use async storage when...              | **Don't** use async storage for... |
 | --------------------------------------------- | ---------------------------------- |
@@ -62,6 +62,7 @@ The [Android Keystore](https://developer.android.com/training/articles/keystore)
 In order to use iOS Keychain services or Android Secure Shared Preferences, you can either write a bridge yourself or use a library which wraps them for you and provides a unified API at your own risk. Some libraries to consider:
 
 - [expo-secure-store](https://docs.expo.io/versions/latest/sdk/securestore/)
+- [react-native-encrypted-storage](https://github.com/emeraldsanto/react-native-encrypted-storage) - uses Keychain on iOS and EncryptedSharedPreferences on Android.
 - [react-native-keychain](https://github.com/oblador/react-native-keychain)
 - [react-native-sensitive-info](https://github.com/mCodex/react-native-sensitive-info) - secure for iOS, but uses Android Shared Preferences for Android (which is not secure by default). There is however a [branch](https://github.com/mCodex/react-native-sensitive-info/tree/keystore) that uses Android Keystore.
   - [redux-persist-sensitive-storage](https://github.com/CodingZeal/redux-persist-sensitive-storage) - wraps react-native-sensitive-info for Redux.

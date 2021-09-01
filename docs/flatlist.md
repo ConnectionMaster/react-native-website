@@ -106,9 +106,9 @@ const DATA = [
   },
 ];
 
-const Item = ({ item, onPress, style }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-    <Text style={styles.title}>{item.title}</Text>
+const Item = ({ item, onPress, backgroundColor, textColor }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+    <Text style={[styles.title, textColor]}>{item.title}</Text>
   </TouchableOpacity>
 );
 
@@ -117,12 +117,14 @@ const App = () => {
 
   const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const color = item.id === selectedId ? 'white' : 'black';
 
     return (
       <Item
         item={item}
         onPress={() => setSelectedId(item.id)}
-        style={{ backgroundColor }}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
       />
     );
   };
@@ -253,21 +255,21 @@ Rendered in between each item, but not at the top or bottom. By default, `highli
 
 ### `ListEmptyComponent`
 
-Rendered when the list is empty. Can be a React Component Class, a render function, or a rendered element.
+Rendered when the list is empty. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
 
-| Type                         |
-| ---------------------------- |
-| component, function, element |
+| Type               |
+| ------------------ |
+| component, element |
 
 ---
 
 ### `ListFooterComponent`
 
-Rendered at the bottom of all the items. Can be a React Component Class, a render function, or a rendered element.
+Rendered at the bottom of all the items. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
 
-| Type                         |
-| ---------------------------- |
-| component, function, element |
+| Type               |
+| ------------------ |
+| component, element |
 
 ---
 
@@ -275,19 +277,19 @@ Rendered at the bottom of all the items. Can be a React Component Class, a rende
 
 Styling for internal View for `ListFooterComponent`.
 
-| Type                                 |
-| ------------------------------------ |
-| [View Style Props](view-style-props) |
+| Type                           |
+| ------------------------------ |
+| [View Style](view-style-props) |
 
 ---
 
 ### `ListHeaderComponent`
 
-Rendered at the top of all the items. Can be a React Component Class, a render function, or a rendered element.
+Rendered at the top of all the items. Can be a React Component (e.g. `SomeComponent`), or a React element (e.g. `<SomeComponent />`).
 
-| Type                         |
-| ---------------------------- |
-| component, function, element |
+| Type               |
+| ------------------ |
+| component, element |
 
 ---
 
@@ -295,9 +297,9 @@ Rendered at the top of all the items. Can be a React Component Class, a render f
 
 Styling for internal View for `ListHeaderComponent`.
 
-| Type                                 |
-| ------------------------------------ |
-| [View Style Props](view-style-props) |
+| Type                           |
+| ------------------------------ |
+| [View Style](view-style-props) |
 
 ---
 
@@ -305,9 +307,9 @@ Styling for internal View for `ListHeaderComponent`.
 
 Optional custom style for multi-item rows generated when `numColumns > 1`.
 
-| Type                                 |
-| ------------------------------------ |
-| [View Style Props](view-style-props) |
+| Type                           |
+| ------------------------------ |
+| [View Style](view-style-props) |
 
 ---
 
@@ -389,7 +391,7 @@ Reverses the direction of scroll. Uses scale transforms of `-1`.
 (item: object, index: number) => string;
 ```
 
-Used to extract a unique key for a given item at the specified index. Key is used for caching and as the react key to track item re-ordering. The default extractor checks `item.key`, then falls back to using the index, like React does.
+Used to extract a unique key for a given item at the specified index. Key is used for caching and as the react key to track item re-ordering. The default extractor checks `item.key`, then `item.id`, and then falls back to using the index, like React does.
 
 | Type     |
 | -------- |
@@ -455,7 +457,7 @@ Called when the viewability of rows changes, as defined by the `viewabilityConfi
 
 ---
 
-### `progressViewOffset` <div class="label android">Android</div>
+### `progressViewOffset`
 
 Set this when offset is needed for the loading indicator to show correctly.
 
@@ -507,7 +509,7 @@ See [`ViewabilityHelper.js`](https://github.com/facebook/react-native/blob/maste
 At least one of the `viewAreaCoveragePercentThreshold` or `itemVisiblePercentThreshold` is required. This needs to be done in the `constructor` to avoid following error ([ref](https://github.com/facebook/react-native/issues/17408)):
 
 ```
-  Error: Changing viewabilityConfig on the fly is not supported`
+  Error: Changing viewabilityConfig on the fly is not supported
 ```
 
 ```jsx

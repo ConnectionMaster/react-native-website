@@ -183,8 +183,18 @@ const showAlert = () =>
   );
 
 const App = () => (
-  <Button title="Show alert" onPress={showAlert} />
+  <View style={styles.container}>
+    <Button title="Show alert" onPress={showAlert} />
+  </View>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  }
+});
 
 export default App;
 ```
@@ -207,7 +217,7 @@ static alert(title, message?, buttons?, options?)
 | ------------------------------------------------------ | -------------------------------- | ----------------------------------------------------------------------- |
 | title <div class="label basic required">Required</div> | string                           | The dialog's title. Passing `null` or empty string will hide the title. |
 | message                                                | string                           | An optional message that appears below the dialog's title.              |
-| buttons                                                | [Buttons](alert#buttons)         | An optional array containg buttons configuration.                       |
+| buttons                                                | [Buttons](alert#buttons)         | An optional array containing buttons configuration.                     |
 | options <div class="label android">Android</div>       | [Options](alert#options-android) | An optional Alert configuration for the Android.                        |
 
 ---
